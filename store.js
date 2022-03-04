@@ -22,6 +22,9 @@ export class DiscountOffer {
       case "Vinted":
         this.discountInPercent = this.getNewVintedDiscount();
         break;
+      case "BackMarket":
+        this.discountInPercent = this.getBackMarketDiscount();
+        break;
       case "Ilek":
         break;
       default:
@@ -34,6 +37,13 @@ export class DiscountOffer {
       return this.getDecreasedDiscount(2);
     }
     return this.getDecreasedDiscount(1);
+  }
+
+  getBackMarketDiscount() {
+    if (this.expiresIn <= 0) {
+      return this.getDecreasedDiscount(4);
+    }
+    return this.getDecreasedDiscount(2);
   }
 
   getNewNaturaliaDiscount() {
