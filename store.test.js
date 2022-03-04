@@ -78,4 +78,16 @@ describe("Store", () => {
       new Store([new DiscountOffer("Vinted", 0, 0)]).updateDiscounts()
     ).toEqual([new DiscountOffer("Vinted", -1, 0)]);
   });
+
+  it("should decrease the discount by 2 when the partner is BackMarket", () => {
+    expect(
+      new Store([new DiscountOffer("BackMarket", 1, 4)]).updateDiscounts()
+    ).toEqual([new DiscountOffer("BackMarket", 0, 2)]);
+  });
+
+  it("should decrease the discount by 4 when the partner is BackMarket and the expiration date is <= 0", () => {
+    expect(
+      new Store([new DiscountOffer("BackMarket", 0, 4)]).updateDiscounts()
+    ).toEqual([new DiscountOffer("BackMarket", -1, 0)]);
+  });
 });
